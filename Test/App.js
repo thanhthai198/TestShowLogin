@@ -8,15 +8,12 @@
 
 import React from 'react';
 import type {Node} from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import Router from "./src/Router";
+import Router from "./src/AppNavigation/Router";
 
 const App: () => Node = () => {
   
   return (
-    <NavigationContainer>
       <Router/>
-    </NavigationContainer>
   );
 };
 

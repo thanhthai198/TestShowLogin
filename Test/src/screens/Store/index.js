@@ -1,9 +1,9 @@
 import React from "react";
 
-const Home = () => {
+const Store = () => {
     return(
         <></>
     )
 }
 
-export default Home;
+export default Store;

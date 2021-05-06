@@ -2,11 +2,10 @@ import React from "react";
 import {TouchableOpacity, Text, View} from "react-native"
 import styles from "./styles"
 
-
-const Home = ({navigation}) => {
-    return (
+const Profile = ({navigation}) => {
+    return(
         <View style={styles.root}>
-            <Text style={{color: '#000000', marginBottom: 40}}> HOME </Text>
+            <Text style={{color: '#000000', marginBottom: 40}}> Profile </Text>
         <TouchableOpacity
             onPress={() => navigation.navigate('Login')}
         >
@@ -16,4 +15,4 @@ const Home = ({navigation}) => {
     )
 }
 
-export default Home;
+export default Profile;

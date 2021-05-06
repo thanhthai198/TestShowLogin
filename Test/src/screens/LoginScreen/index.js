@@ -4,9 +4,103 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ImageConstants from "../../constants/ImageConstants";
 import styles from './styles'
 
-const Login = () => {
+import { AuthContext } from "../../components/context";
+
+const Login = ({navigation}) => {
+
+    const {signIn} = React.useContext(AuthContext);
+
+    const [data, setData] = React.useState({
+        username: '',
+        password: '',
+        check_textInputChange: false,
+        secureTextEntry: true,
+        isValidUser: true,
+        isValidPassword: true,
+    });
+
+    const textInputChange = (val) => {
+        if( val.trim().length >= 4 ) {
+            setData({
+                ...data,
+                username: val,
+                check_textInputChange: true,
+                isValidUser: true
+            });
+        } else {
+            setData({
+                ...data,
+                username: val,
+                check_textInputChange: false,
+                isValidUser: false
+            });
+        }
+    }
+
+    const handlePasswordChange = (val) => {
+        if( val.trim().length >= 8 ) {
+            setData({
+                ...data,
+                password: val,
+                isValidPassword: true
+            });
+        } else {
+            setData({
+                ...data,
+                password: val,
+                isValidPassword: false
+            });
+        }
+    }
+
+    const updateSecureTextEntry = () => {
+        setData({
+            ...data,
+            secureTextEntry: !data.secureTextEntry
+        });
+    }
+
+    const handleValidUser = (val) => {
+        if( val.trim().length >= 4 ) {
+            setData({
+                ...data,
+                isValidUser: true
+            });
+        } else {
+            setData({
+                ...data,
+                isValidUser: false
+            });
+        }
+    }
+
+    const loginHandle = (userName, password) => {
+
+        const foundUser = Users.filter( item => {
+            return userName == item.username && password == item.password;
+        } );
+
+        if ( data.username.length == 0 || data.password.length == 0 ) {
+            Alert.alert('Wrong Input!', 'Username or password field cannot be empty.', [
+                {text: 'Okay'}
+            ]);
+            return;
+        }
+
+        if ( foundUser.length == 0 ) {
+            Alert.alert('Invalid User!', 'Username or password is incorrect.', [
+                {text: 'Okay'}
+            ]);
+            return;
+        }
+        signIn(foundUser);
+    }
+
     return(
         <SafeAreaView style={styles.root}>
+            <TouchableOpacity style={{marginRight: 300}} onPress={() => navigation.goBack()}>
+                <Text>Quay lai Home</Text>
+            </TouchableOpacity>
             <Image style={{
                 width: 95,
                 height: 94,
@@ -42,13 +136,27 @@ const Login = () => {
             </Text>
             <View style={styles.viewInput}>
                 <Image style={{width: 32, height: 28, marginHorizontal: 10}} source={ImageConstants.IconMail}/>
-                <TextInput placeholder={"Email Adress"} style={styles.textInput}/>
+                <TextInput 
+                placeholder={"Email Adress"} 
+                style={styles.textInput} 
+                autoCapitalize="none"
+                onChangeText={(val) => textInputChange(val)}
+                onEndEditing={(e)=>handleValidUser(e.nativeEvent.text)}
+                />
             </View>
             <View style={styles.viewInput}>
                 <Image style={{width: 28, height: 32, marginHorizontal: 10}} source={ImageConstants.IconLock}/>
-                <TextInput placeholder={"Password"} style={styles.textInput}/>
+                <TextInput 
+                placeholder={"Password"} 
+                style={styles.textInput}
+                secureTextEntry={data.secureTextEntry ? true : false}
+                autoCapitalize="none"
+                onChangeText={(val) => handlePasswordChange(val)}
+                />
             </View>
-            <TouchableOpacity style={styles.button}>
+            <TouchableOpacity style={styles.button}
+            onPress={() => {signIn()}}
+            >
                 <Text style={{fontSize: 17, color: '#ffffff', fontWeight: '700'}}>Login</Text>
             </TouchableOpacity>
             <View style={{flexDirection: 'row', justifyContent: 'space-between', margin: 10}}>
