@@ -1,6 +1,8 @@
 import React from "react";
 import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity, Touchable} from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
+import ImageConstants from "../../constants/ImageConstants";
+import styles from './styles'
 
 const Login = () => {
     return(
@@ -8,7 +10,7 @@ const Login = () => {
             <Image style={{
                 width: 95,
                 height: 94,
-            }} source={require('../assets/img/Path.png')}/>
+            }} source={ImageConstants.Path}/>
             <Text style={{
                 fontSize: 30,
                 color: '#ff344c',
@@ -39,11 +41,11 @@ const Login = () => {
                 Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
             </Text>
             <View style={styles.viewInput}>
-                <Image style={{width: 32, height: 28, marginHorizontal: 10}} source={require('../assets/img/Icon_Mail.png')}/>
+                <Image style={{width: 32, height: 28, marginHorizontal: 10}} source={ImageConstants.IconMail}/>
                 <TextInput placeholder={"Email Adress"} style={styles.textInput}/>
             </View>
             <View style={styles.viewInput}>
-                <Image style={{width: 28, height: 32, marginHorizontal: 10}} source={require('../assets/img/Icon_Lock.png')}/>
+                <Image style={{width: 28, height: 32, marginHorizontal: 10}} source={ImageConstants.IconLock}/>
                 <TextInput placeholder={"Password"} style={styles.textInput}/>
             </View>
             <TouchableOpacity style={styles.button}>
@@ -67,37 +69,6 @@ const Login = () => {
     )
 }
 
-const styles = StyleSheet.create({
-    root: {
-        flex: 1,
-        alignItems: 'center',
-        backgroundColor: '#fff'
-    },
-    viewInput: {
-        width: 350,
-        height: 70,
-        backgroundColor: '#fff',
-        marginBottom: 10,
-        flexDirection: 'row',
-        borderColor: '#080808',
-        borderWidth: 0.6,
-        alignItems: 'center',
-        borderRadius: 10
-    },
-    textInput: {
-        backgroundColor: '#fff',
-        textAlign: 'center',
-        height: 65
-    },
-    button: {
-        width: 300,
-        height: 52,
-        alignItems: 'center',
-        backgroundColor: '#ff6a83',
-        borderRadius: 26,
-        justifyContent: 'center',
-        margin: 10
-    }
-})
+
 
 export default Login;
