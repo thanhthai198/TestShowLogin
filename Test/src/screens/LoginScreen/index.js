@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, StyleSheet, Text, TextInput, TouchableOpacity, Touchable} from "react-native";
+import { View, Image, Text, TextInput, TouchableOpacity} from "react-native";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ImageConstants from "../../constants/ImageConstants";
 import styles from './styles'
@@ -98,9 +98,6 @@ const Login = ({navigation}) => {
 
     return(
         <SafeAreaView style={styles.root}>
-            <TouchableOpacity style={{marginRight: 300}} onPress={() => navigation.goBack()}>
-                <Text>Quay lai Home</Text>
-            </TouchableOpacity>
             <Image style={{
                 width: 95,
                 height: 94,

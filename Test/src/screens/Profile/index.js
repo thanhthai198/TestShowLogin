@@ -1,18 +1,26 @@
-import React from "react";
-import {TouchableOpacity, Text, View} from "react-native"
-import styles from "./styles"
+import React, {useEffect} from 'react';
+import {Button, View, StyleSheet, Text} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import styles from './styles';
 
-const Profile = ({navigation}) => {
-    return(
-        <View style={styles.root}>
-            <Text style={{color: '#000000', marginBottom: 40}}> Profile </Text>
-        <TouchableOpacity
-            onPress={() => navigation.navigate('Login')}
-        >
-            <Text style={{color: '#000000', fontSize: 14}}>Go To Login</Text>
-        </TouchableOpacity>
-        </View>
-    )
-}
+import {useSelector, useDispatch} from 'react-redux';
+import {addtion, subtractions} from '../../redux/store/actions';
+
+const Profile = () => {
+  const data = useSelector(state => state.counter);
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
+
+  const dispatch = useDispatch();
+
+  return (
+    <SafeAreaView style={styles.root}>
+      <Button title="Add" onPress={() => dispatch(addtion())} />
+      <Text>{data}</Text>
+      <Button title="Subtract" onPress={() => dispatch(subtractions())} />
+    </SafeAreaView>
+  );
+};
 
 export default Profile;
